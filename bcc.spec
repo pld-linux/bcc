@@ -1,7 +1,7 @@
 Summary:	Bruce's C compiler
 Summary(pl):	Kompiler C Bruce'a
 Name:		bcc
-Version:	0.16.8
+Version:	0.16.10
 Release:	1
 License:	GPL
 Group:		Development/Languages
