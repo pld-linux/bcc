@@ -6,7 +6,7 @@ diff -urN dev86-0.16.0.org/elksemu/Makefile dev86-0.16.0/elksemu/Makefile
  install: elksemu
  	install -d $(DIST)/lib
 -	install -s -o root -g root -m 4555 elksemu $(DIST)/lib/elksemu
-+	install -s -m 4555 elksemu $(DIST)/lib/elksemu
++	install -m 755 elksemu $(DIST)/lib/elksemu
  
  clean realclean:
  	rm -f $(OBJ) binfmt_elks.o elksemu call_tab.v defn_tab.v
@@ -15,18 +15,18 @@ diff -urN dev86-0.16.0.org/makefile.in dev86-0.16.0/makefile.in
 +++ dev86-0.16.0/makefile.in	Mon Nov  5 10:14:00 2001
 @@ -68,13 +68,13 @@
  
- # Alter these if for some reason you don't want this done as root.
- #ifdef __BCC__
+ # Yet again other systems have general weirdness here.
+ #ifdef __linux__
 -INDAT=-o root -g root -m 644
--INEXE=-o root -g root -m 755
+-INEXE=-o root -g root -m 755 -s
 -INSCR=-o root -g root -m 755
 +INDAT=-m 644
 +INEXE=-m 755
 +INSCR=-m 755
  #else
--INDAT=-o root -g root -m 644
--INEXE=-o root -g root -m 755 -s
--INSCR=-o root -g root -m 755
+-INDAT=-m 644
+-INEXE=-m 755
+-INSCR=-m 755
 +INDAT=-m 644
 +INEXE=-m 755
 +INSCR=-m 755

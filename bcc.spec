@@ -1,20 +1,20 @@
 Summary:	Bruce's C compiler
 Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
-Version:	0.16.13
+Version:	0.16.14
 Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
-# Source0-md5:	baa3bbf202ebc921526b98c5a20a3158
+# Source0-md5:	abe6bc03cf37703a7f3991bec8b5f715
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
 Patch2:		Dev86src-opt.patch
 Patch3:		Dev86src-errno.patch
 URL:		http://www.cix.co.uk/~mayday/
 Requires:	bin86
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 ExclusiveArch:	%{ix86}
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # don't try to strip Linux-8086 objects
 %define		no_install_post_strip	1
