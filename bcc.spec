@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl):	Kompiler C Bruce'a
 Name:		bcc
 Version:	0.16.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
@@ -11,6 +11,7 @@ Source0:	http://www.cix.co.uk/~mayday/Dev86src-%{version}.tar.gz
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
 Patch2:		Dev86src-bccpaths.patch
+Patch3:		Dev86src-opt.patch
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 ExclusiveArch:	%{ix86}
 Requires:	bin86
@@ -32,9 +33,10 @@ s± odwzorowywane do jednego z innych typów ca³kowitych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
-CC="%{__cc}" %{__make} <<!FooBar!
+CC="%{__cc}" %{__make} OPT="%{rpmcflags}" <<!FooBar!
 5
 quit
 !FooBar!
@@ -53,11 +55,11 @@ ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/nm86
 ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/size86
 
 # move header files out of %{_includedir} and into %{_libdir}/bcc/include
-mv $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT%{_libdir}/bcc
+mv -f $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT%{_libdir}/bcc
 
 # move man pages where they belong
 install -d $RPM_BUILD_ROOT%{_mandir}
-mv $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
+mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 
 gzip -9nf README MAGIC Contributors bootblocks/README copt/README \
 	dis88/README elksemu/README unproto/README bin86/README-0.4 \
@@ -69,7 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.gz */*.gz
-%doc elksemu/README unproto/README bin86/README-0.4 bin86/README bin86/ChangeLog
 %dir %{_libdir}/bcc
 %dir %{_libdir}/bcc/i86
 %dir %{_libdir}/bcc/i386

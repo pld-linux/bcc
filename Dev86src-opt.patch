@@ -1,0 +1,24 @@
+diff -Nur dev86-0.16.0.orig/libbsd/Make.defs dev86-0.16.0/libbsd/Make.defs
+--- dev86-0.16.0.orig/libbsd/Make.defs	Tue Apr 23 22:46:59 1996
++++ dev86-0.16.0/libbsd/Make.defs	Sun Nov 11 19:26:59 2001
+@@ -53,7 +53,7 @@
+ CC=gcc $(ARCH)
+ # ARCH=-b i486-linuxaout
+ LKFLAGS=-static -N
+-CCFLAGS=-O6 -fomit-frame-pointer -I- -I$(TOP)/include -I. -fno-builtin
++CCFLAGS=$(OPT) -fomit-frame-pointer -I- -I$(TOP)/include -I. -fno-builtin
+ WALL=	-ansi -pedantic -Wwrite-strings -Wpointer-arith -Wcast-qual \
+ 	-Wcast-align -Wtraditional -Wstrict-prototypes -Wmissing-prototypes \
+ 	-Wnested-externs -Winline -Wshadow
+diff -Nur dev86-0.16.0.orig/makefile.in dev86-0.16.0/makefile.in
+--- dev86-0.16.0.orig/makefile.in	Sun Nov 11 19:25:16 2001
++++ dev86-0.16.0/makefile.in	Sun Nov 11 19:26:23 2001
+@@ -39,7 +39,7 @@
+ WALL  =-Wstrict-prototypes
+ 
+ CC	=gcc
+-CFLAGS	=$(GCCFLAG) -Wall $(WALL) -O6 -g
++CFLAGS	=$(GCCFLAG) -Wall $(WALL) $(OPT)
+ #endif
+ 
+ #ifndef GNUMAKE
