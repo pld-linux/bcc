@@ -1,16 +1,14 @@
 Summary:	Bruce's C compiler
 Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
-Version:	0.16.14
+Version:	0.16.15
 Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
-# Source0-md5:	abe6bc03cf37703a7f3991bec8b5f715
+# Source0-md5:	c3266fa6530b472e1d3e98d826db6409
 Patch0:		Dev86src-noroot.patch
-Patch1:		Dev86src-nobcc.patch
-Patch2:		Dev86src-opt.patch
-Patch3:		Dev86src-errno.patch
+Patch1:		Dev86src-opt.patch
 URL:		http://www.cix.co.uk/~mayday/
 Requires:	bin86
 ExclusiveArch:	%{ix86}
@@ -35,8 +33,6 @@ s± odwzorowywane do jednego z innych typów ca³kowitych.
 %setup -q -n dev86-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 CC="%{__cc}" \
@@ -52,21 +48,20 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install-all \
 	DIST=$RPM_BUILD_ROOT
 
-install $RPM_BUILD_ROOT/lib/elksemu $RPM_BUILD_ROOT%{_bindir}
+# FFU (dis88/Makefile is not ready)
+#	MANDIR=%{_mandir}
+
 cp -R libc/kinclude $RPM_BUILD_ROOT%{_libdir}/bcc
 
 ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/nm86
 ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/size86
 
-# move header files out of %{_includedir} and into %{_libdir}/bcc/include
-mv -f $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT%{_libdir}/bcc
-
-# move man pages where they belong
-install -d $RPM_BUILD_ROOT%{_mandir}
-rm -f $RPM_BUILD_ROOT/usr/man/man1/{as,ld}86.1*
-mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 # these are separated in bin86 package
 rm -f $RPM_BUILD_ROOT%{_bindir}/{as86,ld86}
+rm -f $RPM_BUILD_ROOT/usr/man/man1/{as,ld}86.1*
+# move man pages where they belong
+install -d $RPM_BUILD_ROOT%{_mandir}
+mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 
 %{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{ar86,bcc,elksemu,objdump86}}
 %{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_libdir}/bcc/{bcc*,copt,unproto}}
@@ -83,22 +78,24 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc Changes Contributors README*
-%attr(755,root,root) %{_bindir}/bcc
 %attr(755,root,root) %{_bindir}/ar86
-%attr(755,root,root) %{_bindir}/as86_encap
+%attr(755,root,root) %{_bindir}/bcc
 %attr(755,root,root) %{_bindir}/dis86
-%attr(755,root,root) %{_bindir}/objdump86
+%attr(755,root,root) %{_bindir}/elksemu
+%attr(755,root,root) %{_bindir}/makeboot
 %attr(755,root,root) %{_bindir}/nm86
+%attr(755,root,root) %{_bindir}/objdump86
 %attr(755,root,root) %{_bindir}/size86
-%{_libdir}/liberror.txt
 %dir %{_libdir}/bcc
-%attr(755,root,root) %{_libdir}/bcc/bcc-cpp
+%attr(755,root,root) %{_libdir}/bcc/as86_encap
 %attr(755,root,root) %{_libdir}/bcc/bcc-cc1
+%attr(755,root,root) %{_libdir}/bcc/bcc-cpp
 %attr(755,root,root) %{_libdir}/bcc/copt
 %attr(755,root,root) %{_libdir}/bcc/unproto
-%{_libdir}/bcc/i86
 %{_libdir}/bcc/i386
 %{_libdir}/bcc/include
 %{_libdir}/bcc/kinclude
-%attr(755,root,root) %{_bindir}/elksemu
+%{_libdir}/bcc/crt*.o
+%{_libdir}/bcc/lib*.a
+%{_libdir}/bcc/rules.*
 %{_mandir}/man1/*
