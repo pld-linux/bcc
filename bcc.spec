@@ -29,9 +29,9 @@ s± odwzorowywane do jednego z innych typów ca³kowitych.
 
 %prep
 %setup -q -n dev86-%{version}
-%patch0 -b .oot -p1
-%patch1 -b .djb -p1
-%patch2 -b .bccpaths -p1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 CC="%{__cc}" %{__make} <<!FooBar!
@@ -42,30 +42,33 @@ quit
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} DIST=${RPM_BUILD_ROOT} install
+%{__make} install \
+	DIST=$RPM_BUILD_ROOT
 
-install -m 755 $RPM_BUILD_ROOT/lib/elksemu $RPM_BUILD_ROOT%{_bindir}
-#rm -rf ${RPM_BUILD_ROOT}/lib/
-cp -R libc/kinclude ${RPM_BUILD_ROOT}%{_libdir}/bcc
+install $RPM_BUILD_ROOT/lib/elksemu $RPM_BUILD_ROOT%{_bindir}
+#rm -rf $RPM_BUILD_ROOT/lib/
+cp -R libc/kinclude $RPM_BUILD_ROOT%{_libdir}/bcc
 
-cd ${RPM_BUILD_ROOT}%{_bindir}
-rm -f nm86 size86
-ln -s objdump86 nm86
-ln -s objdump86 size86
+ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/nm86
+ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/size86
 
 # move header files out of %{_includedir} and into %{_libdir}/bcc/include
-mv ${RPM_BUILD_ROOT}%{_includedir} ${RPM_BUILD_ROOT}%{_libdir}/bcc
+mv $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT%{_libdir}/bcc
 
 # move man pages where they belong
-install -d ${RPM_BUILD_ROOT}%{_mandir}
-mv ${RPM_BUILD_ROOT}/usr/man/* ${RPM_BUILD_ROOT}%{_mandir}
+install -d $RPM_BUILD_ROOT%{_mandir}
+mv $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
+
+gzip -9nf README MAGIC Contributors bootblocks/README copt/README \
+	dis88/README elksemu/README unproto/README bin86/README-0.4 \
+	bin86/README bin86/ChangeLog
 
 %clean
-rm -rf ${RPM_BUILD_ROOT}
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README MAGIC Contributors bootblocks/README copt/README dis88/README
+%doc *.gz */*.gz
 %doc elksemu/README unproto/README bin86/README-0.4 bin86/README bin86/ChangeLog
 %dir %{_libdir}/bcc
 %dir %{_libdir}/bcc/i86
