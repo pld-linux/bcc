@@ -5,8 +5,6 @@ Version:	0.16.0
 Release:	3
 License:	GPL
 Group:		Development/Languages
-Group(de):	Entwicklung/Sprachen
-Group(pl):	Programowanie/Jêzyki
 Source0:	http://www.cix.co.uk/~mayday/Dev86src-%{version}.tar.gz
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
