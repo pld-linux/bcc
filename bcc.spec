@@ -57,7 +57,7 @@ mv -f $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT%{_libdir}/bcc
 
 # move man pages where they belong
 install -d $RPM_BUILD_ROOT%{_mandir}
-rm -f $RPM_BUILD_ROOT/usr/man/{as,ld}86.1*
+rm -f $RPM_BUILD_ROOT/usr/man/man1/{as,ld}86.1*
 mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 
 gzip -9nf README MAGIC Contributors bootblocks/README copt/README \
