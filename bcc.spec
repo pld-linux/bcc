@@ -1,5 +1,5 @@
 Summary:	Bruce's C compiler
-Summary(pl):	Kompiler C Bruce'a
+Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.10
 Release:	1
@@ -24,9 +24,9 @@ compiler understands traditional K&R C with just the restriction that
 bit fields are mapped to one of the other integer types.
 
 %description -l pl
-Bcc jest prostym kompilatorem C produkuj±cym pliki asemblerowe 8086,
+Bcc jest prostym kompilatorem C tworz±cym pliki asemblerowe 8086,
 a dodatkowo pozwala na wybranie wersji 80386 lub 6809. Kompilator
-rozumie tradycyjne K&R C z takim ograniczeniem, ¿e pola bitowe
+rozumie tradycyjne C K&R z takim ograniczeniem, ¿e pola bitowe
 s± odwzorowywane do jednego z innych typów ca³kowitych.
 
 %prep
