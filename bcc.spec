@@ -71,6 +71,7 @@ rm -rf ${RPM_BUILD_ROOT}
 %dir %{_libdir}/bcc/i86
 %dir %{_libdir}/bcc/i386
 %dir %{_libdir}/bcc/include
+%dir %{_libdir}/bcc/kinclude
 %attr(755,root,root) %{_bindir}/bcc
 #%attr(755,root,root) %{_bindir}/as86
 %attr(755,root,root) %{_bindir}/as86_encap
