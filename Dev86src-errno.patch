@@ -1,0 +1,27 @@
+--- dev86-0.16.12/ar/ar.c.orig	2002-03-26 08:24:53.000000000 +0100
++++ dev86-0.16.12/ar/ar.c	2003-08-08 22:31:48.000000000 +0200
+@@ -31,6 +31,7 @@
+ #include <sys/stat.h>
+ #include "ar.h"
+ #include "rel_aout.h"
++#include <errno.h>
+ 
+ #ifdef __BCC__
+ #define HAVE_RENAME
+@@ -44,8 +45,6 @@
+ #undef  HAVE_FSYNC
+ #endif
+ 
+-extern int errno;
+-
+ #ifdef	__GNUC__
+ # ifndef alloca
+ #  define	alloca	__builtin_alloca
+@@ -67,7 +66,6 @@
+ /* Locking is normally disabled because fcntl hangs on the Sun
+    and it isn't supported properly across NFS anyway.  */
+ #ifdef LOCKS
+-#include <errno.h>
+ #endif
+ 
+ /* This structure is used internally to represent the info

@@ -1,15 +1,16 @@
 Summary:	Bruce's C compiler
 Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
-Version:	0.16.11
+Version:	0.16.12
 Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
-# Source0-md5:	7139cf3f48a3836672cf229162bf36b8
+# Source0-md5:	623480d77b685b1e7c762df04ad5e154
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
 Patch2:		Dev86src-opt.patch
+Patch3:		Dev86src-errno.patch
 URL:		http://www.cix.co.uk/~mayday/
 Requires:	bin86
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -35,9 +36,12 @@ s± odwzorowywane do jednego z innych typów ca³kowitych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
-CC="%{__cc}" %{__make} all other OPT="%{rpmcflags}" <<!FooBar!
+CC="%{__cc}" \
+%{__make} all other \
+	OPT="%{rpmcflags}" <<!FooBar!
 5
 quit
 !FooBar!
@@ -49,7 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 	DIST=$RPM_BUILD_ROOT
 
 install $RPM_BUILD_ROOT/lib/elksemu $RPM_BUILD_ROOT%{_bindir}
-#rm -rf $RPM_BUILD_ROOT/lib/
 cp -R libc/kinclude $RPM_BUILD_ROOT%{_libdir}/bcc
 
 ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/nm86
