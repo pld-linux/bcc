@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl):	Kompiler C Bruce'a
 Name:		bcc
 Version:	0.16.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www.cix.co.uk/~mayday/Dev86src-%{version}.tar.gz
@@ -57,6 +57,7 @@ mv -f $RPM_BUILD_ROOT%{_includedir} $RPM_BUILD_ROOT%{_libdir}/bcc
 
 # move man pages where they belong
 install -d $RPM_BUILD_ROOT%{_mandir}
+rm -f $RPM_BUILD_ROOT/usr/man/{as,ld}86.1*
 mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 
 gzip -9nf README MAGIC Contributors bootblocks/README copt/README \
