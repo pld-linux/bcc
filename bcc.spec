@@ -1,12 +1,12 @@
 Summary:	Bruce's C compiler
 Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
-Version:	0.16.12
+Version:	0.16.13
 Release:	1
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
-# Source0-md5:	623480d77b685b1e7c762df04ad5e154
+# Source0-md5:	baa3bbf202ebc921526b98c5a20a3158
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
 Patch2:		Dev86src-opt.patch
