@@ -10,9 +10,10 @@ Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
 Patch2:		Dev86src-bccpaths.patch
 Patch3:		Dev86src-opt.patch
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-ExclusiveArch:	%{ix86}
+URL:		http://www.cix.co.uk/~mayday/
 Requires:	bin86
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+ExclusiveArch:	%{ix86}
 
 %description
 Bcc is a simple C compiler that produces 8086 assembler, in addition
