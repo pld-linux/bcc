@@ -1,6 +1,5 @@
-diff -urN dev86-0.16.0.org/elksemu/Makefile dev86-0.16.0/elksemu/Makefile
---- dev86-0.16.0.org/elksemu/Makefile	Mon Nov  5 10:12:46 2001
-+++ dev86-0.16.0/elksemu/Makefile	Mon Nov  5 10:13:12 2001
+--- dev86-0.16.15.org/elksemu/Makefile	Mon Nov  5 10:12:46 2001
++++ dev86-0.16.15/elksemu/Makefile	Mon Nov  5 10:13:12 2001
 @@ -39,7 +39,7 @@
  # to redirect.
  install: elksemu
@@ -10,26 +9,3 @@ diff -urN dev86-0.16.0.org/elksemu/Makefile dev86-0.16.0/elksemu/Makefile
  
  clean realclean:
  	rm -f $(OBJ) binfmt_elks.o elksemu call_tab.v defn_tab.v
-diff -urN dev86-0.16.0.org/makefile.in dev86-0.16.0/makefile.in
---- dev86-0.16.0.org/makefile.in	Mon Nov  5 10:12:47 2001
-+++ dev86-0.16.0/makefile.in	Mon Nov  5 10:14:00 2001
-@@ -68,13 +68,13 @@
- 
- # Yet again other systems have general weirdness here.
- #ifdef __linux__
--INDAT=-o root -g root -m 644
--INEXE=-o root -g root -m 755 -s
--INSCR=-o root -g root -m 755
-+INDAT=-m 644
-+INEXE=-m 755
-+INSCR=-m 755
- #else
--INDAT=-m 644
--INEXE=-m 755
--INSCR=-m 755
-+INDAT=-m 644
-+INEXE=-m 755
-+INSCR=-m 755
- #endif
- 
- #ifdef GNUMAKE

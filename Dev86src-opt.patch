@@ -10,12 +10,12 @@ diff -Nur dev86-0.16.0.orig/libbsd/Make.defs dev86-0.16.0/libbsd/Make.defs
  WALL=	-ansi -pedantic -Wwrite-strings -Wpointer-arith -Wcast-qual \
  	-Wcast-align -Wtraditional -Wstrict-prototypes -Wmissing-prototypes \
  	-Wnested-externs -Winline -Wshadow
---- dev86-0.16.8/Makefile.orig	Tue Aug 27 21:54:49 2002
-+++ dev86-0.16.8/Makefile	Tue Aug 27 21:57:17 2002
+--- dev86-0.16.15/Makefile.orig	Tue Aug 27 21:54:49 2002
++++ dev86-0.16.15/Makefile	Tue Aug 27 21:57:17 2002
 @@ -16,7 +16,7 @@
- LIBPRE=  $(PREFIX)
- BINDIR=	 $(PREFIX)/bin
- LIBDIR=  $(LIBPRE)/lib/bcc
+ INCLDIR= $(PREFIX)/lib/bcc
+ ASLDDIR= $(BINDIR)
+ MANDIR=	 $(PREFIX)/man
 -CFLAGS=  -O
 +CFLAGS=  $(OPT)
  
