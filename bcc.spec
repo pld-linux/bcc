@@ -5,7 +5,7 @@ Version:	0.16.8
 Release:	1
 License:	GPL
 Group:		Development/Languages
-Source0:	http://www.cix.co.uk/~mayday/Dev86src-%{version}.tar.gz
+Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-nobcc.patch
 Patch2:		Dev86src-opt.patch
