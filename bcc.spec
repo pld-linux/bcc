@@ -45,6 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 
 install -m 755 $RPM_BUILD_ROOT/lib/elksemu $RPM_BUILD_ROOT%{_bindir}
 #rm -rf ${RPM_BUILD_ROOT}/lib/
+cp -R libc/kinclude ${RPM_BUILD_ROOT}%{_libdir}/bcc
 
 cd ${RPM_BUILD_ROOT}%{_bindir}
 rm -f nm86 size86
@@ -53,6 +54,10 @@ ln -s objdump86 size86
 
 # move header files out of %{_includedir} and into %{_libdir}/bcc/include
 mv ${RPM_BUILD_ROOT}%{_includedir} ${RPM_BUILD_ROOT}%{_libdir}/bcc
+
+# move man pages where they belong
+install -d ${RPM_BUILD_ROOT}%{_mandir}
+mv ${RPM_BUILD_ROOT}/usr/man/* ${RPM_BUILD_ROOT}%{_mandir}
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
@@ -66,18 +71,19 @@ rm -rf ${RPM_BUILD_ROOT}
 %dir %{_libdir}/bcc/i386
 %dir %{_libdir}/bcc/include
 %attr(755,root,root) %{_bindir}/bcc
-%attr(755,root,root) %{_bindir}/as86
+#%attr(755,root,root) %{_bindir}/as86
 %attr(755,root,root) %{_bindir}/as86_encap
-%attr(755,root,root) %{_bindir}/ld86
+#%attr(755,root,root) %{_bindir}/ld86
 %attr(755,root,root) %{_bindir}/objdump86
 %attr(755,root,root) %{_bindir}/nm86
 %attr(755,root,root) %{_bindir}/size86
-%{_libdir}/bcc/bcc-cc1
-%{_libdir}/bcc/copt
-%{_libdir}/bcc/unproto
+%attr(755,root,root) %{_libdir}/bcc/bcc-cc1
+%attr(755,root,root) %{_libdir}/bcc/copt
+%attr(755,root,root) %{_libdir}/bcc/unproto
 %{_libdir}/bcc/i86/*
 %{_libdir}/bcc/i386/*
 %{_libdir}/liberror.txt
 %{_libdir}/bcc/include/*
+%{_libdir}/bcc/kinclude/*
 %attr(755,root,root) %{_bindir}/elksemu
 %{_mandir}/man1/*
