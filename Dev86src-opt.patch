@@ -10,15 +10,36 @@ diff -Nur dev86-0.16.0.orig/libbsd/Make.defs dev86-0.16.0/libbsd/Make.defs
  WALL=	-ansi -pedantic -Wwrite-strings -Wpointer-arith -Wcast-qual \
  	-Wcast-align -Wtraditional -Wstrict-prototypes -Wmissing-prototypes \
  	-Wnested-externs -Winline -Wshadow
-diff -Nur dev86-0.16.0.orig/makefile.in dev86-0.16.0/makefile.in
---- dev86-0.16.0.orig/makefile.in	Sun Nov 11 19:25:16 2001
-+++ dev86-0.16.0/makefile.in	Sun Nov 11 19:26:23 2001
-@@ -39,7 +39,7 @@
- WALL  =-Wstrict-prototypes
+--- dev86-0.16.8/Makefile.orig	Tue Aug 27 21:54:49 2002
++++ dev86-0.16.8/Makefile	Tue Aug 27 21:57:17 2002
+@@ -16,7 +16,7 @@
+ LIBPRE=  $(PREFIX)
+ BINDIR=	 $(PREFIX)/bin
+ LIBDIR=  $(LIBPRE)/lib/bcc
+-CFLAGS=  -O
++CFLAGS=  $(OPT)
  
- CC	=gcc
--CFLAGS	=$(GCCFLAG) -Wall $(WALL) -O6 -g
-+CFLAGS	=$(GCCFLAG) -Wall $(WALL) $(OPT)
+ # Some makes take the last of a list as the default ...
+ all: make.fil
+--- dev86-0.16.8/makefile.in.orig	Tue Aug 27 21:57:45 2002
++++ dev86-0.16.8/makefile.in	Tue Aug 27 22:00:41 2002
+@@ -40,7 +40,7 @@
+ WALL  =-Wall -Wstrict-prototypes
+ 
+ CC	=%CC%
+-CFLAGS	=$(GCCFLAG) $(WALL) -O2 -g
++CFLAGS	=$(GCCFLAG) $(WALL) $(OPT)
  #endif
  
  #ifndef GNUMAKE
+--- dev86-0.16.8/dis88/Makefile.orig	Fri Jul 31 15:01:40 1998
++++ dev86-0.16.8/dis88/Makefile	Tue Aug 27 22:38:03 2002
+@@ -25,7 +25,7 @@
+ # be necessary to alter the formats of the tables.
+ 
+ #CC=bcc
+-CFLAGS=-O
++CFLAGS=$(OPT)
+ LDFLAGS=
+ PREFIX=/usr
+ 
