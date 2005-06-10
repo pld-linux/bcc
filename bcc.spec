@@ -1,16 +1,15 @@
 Summary:	Bruce's C compiler
 Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
-Version:	0.16.16
+Version:	0.16.17
 Release:	1
 License:	GPL
 Group:		Development/Languages
 #Source0Download: http://www.cix.co.uk/~mayday/
 Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
-# Source0-md5:	60ee82708b1ca6e175f094d2352be9ac
+# Source0-md5:	e7bbfdbe61c2fb964994a087e29b0087
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-opt.patch
-Patch2:		Dev86src-segv.patch
 URL:		http://www.cix.co.uk/~mayday/
 Requires:	bin86
 ExclusiveArch:	%{ix86}
@@ -35,7 +34,6 @@ s± odwzorowywane do jednego z innych typów ca³kowitych.
 %setup -q -n dev86-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 CC="%{__cc}" \
