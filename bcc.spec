@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.17
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 #Source0Download: http://www.cix.co.uk/~mayday/
