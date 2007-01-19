@@ -35,6 +35,12 @@ s± odwzorowywane do jednego z innych typów ca³kowitych.
 %patch0 -p1
 %patch1 -p1
 
+mv -f bootblocks/README README.bootblocks
+mv -f copt/README README.copt
+mv -f dis88/README README.dis88
+mv -f elksemu/README README.elksemu
+mv -f unproto/README README.unproto
+
 %build
 CC="%{__cc}" \
 %{__make} all other \
@@ -66,12 +72,6 @@ mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 
 %{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{ar86,bcc,elksemu,objdump86}}
 %{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_libdir}/bcc/{bcc*,copt,unproto}}
-
-mv -f bootblocks/README README.bootblocks
-mv -f copt/README README.copt
-mv -f dis88/README README.dis88
-mv -f elksemu/README README.elksemu
-mv -f unproto/README README.unproto
 
 %clean
 rm -rf $RPM_BUILD_ROOT
