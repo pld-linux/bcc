@@ -1,0 +1,3 @@
+- opt patch - use %rpmcflags
+- fixed %doc
+- release 3
