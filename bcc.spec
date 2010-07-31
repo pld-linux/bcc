@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl.UTF-8):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.17
-Release:	2
+Release:	3
 License:	GPL
 Group:		Development/Languages
 #Source0Download: http://www.cix.co.uk/~mayday/
@@ -44,7 +44,7 @@ mv -f unproto/README README.unproto
 
 %build
 CC="%{__cc}" \
-%{__make} all other \
+%{__make} -j1 all other \
 	OPT="%{rpmcflags}" <<!FooBar!
 5
 quit
@@ -53,7 +53,7 @@ quit
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install-all \
+%{__make} -j1 install-all \
 	DIST=$RPM_BUILD_ROOT
 
 # FFU (dis88/Makefile is not ready)
