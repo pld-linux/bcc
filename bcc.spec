@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl.UTF-8):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.17
-Release:	5
+Release:	6
 License:	GPL
 Group:		Development/Languages
 Source0:	http://homepage.ntlworld.com/robert.debath/dev86/Dev86src-%{version}.tar.gz
@@ -12,9 +12,13 @@ Patch1:		Dev86src-opt.patch
 Patch2:		dev86-0.16.17-fortify.patch
 Patch3:		dev86-pic.patch
 Patch4:		dev86-0.16.17-make382.patch
+Patch5:		dev86-64bit.patch
+Patch6:		dev86-noelks.patch
+Patch7:		dev86-long.patch
+Patch8:		dev86-nostrip.patch
+Patch9:		dev86-print-overflow.patch
 URL:		http://homepage.ntlworld.com/robert.debath/
 Requires:	bin86
-ExclusiveArch:	%{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # don't try to strip Linux-8086 objects
@@ -40,6 +44,13 @@ są odwzorowywane do jednego z innych typów całkowitych.
 %patch2 -p1
 %patch3 -p0
 %patch4 -p0
+%ifarch %{x8664}
+%patch5 -p1
+%patch6 -p1
+%endif
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 mv -f bootblocks/README README.bootblocks
 mv -f copt/README README.copt
@@ -59,7 +70,10 @@ quit
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} -j1 install-all \
-	DIST=$RPM_BUILD_ROOT
+	DIST=$RPM_BUILD_ROOT \
+	LIBDIR=%{_libdir}/bcc \
+	INCLDIR=%{_libdir}/bcc \
+	LOCALPREFIX=%{_prefix}
 
 # FFU (dis88/Makefile is not ready)
 #	MANDIR=%{_mandir}
@@ -70,13 +84,17 @@ ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/nm86
 ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/size86
 
 # these are separated in bin86 package
-rm -f $RPM_BUILD_ROOT%{_bindir}/{as86,ld86}
-rm -f $RPM_BUILD_ROOT/usr/man/man1/{as,ld}86.1*
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/{as86,ld86}
+%{__rm} $RPM_BUILD_ROOT/usr/man/man1/{as,ld}86.1*
 # move man pages where they belong
 install -d $RPM_BUILD_ROOT%{_mandir}
 mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
 
+%ifnarch %{x8664}
 %{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{ar86,bcc,elksemu,objdump86}}
+%else
+%{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{ar86,bcc,objdump86}}
+%endif
 %{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_libdir}/bcc/{bcc*,copt,unproto}}
 
 %clean
@@ -88,7 +106,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ar86
 %attr(755,root,root) %{_bindir}/bcc
 %attr(755,root,root) %{_bindir}/dis86
+%ifnarch %{x8664}
 %attr(755,root,root) %{_bindir}/elksemu
+%endif
 %attr(755,root,root) %{_bindir}/makeboot
 %attr(755,root,root) %{_bindir}/nm86
 %attr(755,root,root) %{_bindir}/objdump86
