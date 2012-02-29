@@ -5,8 +5,7 @@ Version:	0.16.17
 Release:	5
 License:	GPL
 Group:		Development/Languages
-#Source0Download: http://www.cix.co.uk/~mayday/
-Source0:	http://www.cix.co.uk/~mayday/dev86/Dev86src-%{version}.tar.gz
+Source0:	http://homepage.ntlworld.com/robert.debath/dev86/Dev86src-%{version}.tar.gz
 # Source0-md5:	e7bbfdbe61c2fb964994a087e29b0087
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-opt.patch
