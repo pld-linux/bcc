@@ -1,0 +1,21 @@
+--- dev86-0.16.18/dis88/Makefile.orig	2012-04-05 16:11:40.089215036 +0200
++++ dev86-0.16.18/dis88/Makefile	2012-04-05 16:33:25.792595180 +0200
+@@ -28,6 +28,7 @@
+ CFLAGS=$(OPT)
+ LDFLAGS=
+ PREFIX=/usr
++MANDIR=$(PREFIX)/man
+ 
+ OBJ = disrel.o dismain.o distabs.o dishand.o disfp.o
+ 
+@@ -37,8 +38,8 @@
+ 	$(CC) $(LDFLAGS) -o dis88 $(OBJ)
+ 
+ install:	dis88
+-	install -m 755 -s dis88   $(DIST)$(PREFIX)/bin/dis86
+-	install -m 644    dis88.1 $(DIST)$(PREFIX)/man/man1/dis86.1
++	install -m 755    dis88   $(DIST)$(PREFIX)/bin/dis86
++	install -m 644    dis88.1 $(DIST)$(MANDIR)/man1/dis86.1
+ 
+ $(OBJ): dis.h a.out.h
+ 

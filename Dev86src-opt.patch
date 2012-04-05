@@ -10,17 +10,17 @@ diff -Nur dev86-0.16.0.orig/libbsd/Make.defs dev86-0.16.0/libbsd/Make.defs
  WALL=	-ansi -pedantic -Wwrite-strings -Wpointer-arith -Wcast-qual \
  	-Wcast-align -Wtraditional -Wstrict-prototypes -Wmissing-prototypes \
  	-Wnested-externs -Winline -Wshadow
---- dev86-0.16.15/Makefile.orig	Tue Aug 27 21:54:49 2002
-+++ dev86-0.16.15/Makefile	Tue Aug 27 21:57:17 2002
-@@ -16,7 +16,7 @@
+--- dev86-0.16.18/Makefile.orig	2010-10-23 17:31:44.000000000 +0200
++++ dev86-0.16.18/Makefile	2012-04-05 16:04:39.032535007 +0200
+@@ -18,7 +18,7 @@
  INCLDIR= $(PREFIX)/lib/bcc
  ASLDDIR= $(BINDIR)
  MANDIR=	 $(PREFIX)/man
 -CFLAGS=  -O
 +CFLAGS=  $(OPT)
+ IFDEFNAME= ifdef
  
  # Some makes take the last of a list as the default ...
- all: make.fil
 --- dev86-0.16.8/makefile.in.orig	Tue Aug 27 21:57:45 2002
 +++ dev86-0.16.8/makefile.in	Tue Aug 27 22:00:41 2002
 @@ -40,7 +40,7 @@

@@ -1,29 +1,29 @@
 Summary:	Bruce's C compiler
 Summary(pl.UTF-8):	Kompilator C Bruce'a
 Name:		bcc
-Version:	0.16.17
-Release:	6
+Version:	0.16.18
+Release:	1
 License:	GPL
 Group:		Development/Languages
-Source0:	http://homepage.ntlworld.com/robert.debath/dev86/Dev86src-%{version}.tar.gz
-# Source0-md5:	e7bbfdbe61c2fb964994a087e29b0087
+Source0:	http://www.debath.co.uk/dev86/Dev86src-%{version}.tar.gz
+# Source0-md5:	f2e06b547397383b2b2650b9c4fd9bab
 Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-opt.patch
 Patch2:		dev86-0.16.17-fortify.patch
 Patch3:		dev86-pic.patch
-Patch4:		dev86-0.16.17-make382.patch
-Patch5:		dev86-64bit.patch
-Patch6:		dev86-noelks.patch
-Patch7:		dev86-long.patch
-Patch8:		dev86-nostrip.patch
-Patch9:		dev86-print-overflow.patch
-URL:		http://homepage.ntlworld.com/robert.debath/
-Requires:	bin86
+Patch4:		dev86-64bit.patch
+Patch5:		dev86-noelks.patch
+Patch6:		dev86-long.patch
+Patch7:		dev86-nostrip.patch
+Patch8:		dev86-print-overflow.patch
+Patch9:		dev86-make.patch
+URL:		http://www.debath.co.uk/
+Requires:	bin86 >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # don't try to strip Linux-8086 objects
-# TODO: use _noautostrip
-%define		no_install_post_strip	1
+%define		_noautostrip	.*%{_libdir}/bcc/.*\\.[ao]
+
 
 %description
 Bcc is a simple C compiler that produces 8086 assembler, in addition
@@ -43,11 +43,13 @@ są odwzorowywane do jednego z innych typów całkowitych.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p0
-%patch4 -p0
-%ifarch %{x8664}
-%patch5 -p1
-%patch6 -p1
+%if "%{_lib}" == "lib64"
+%patch4 -p1
 %endif
+%ifnarch %{ix86}
+%patch5 -p1
+%endif
+%patch6 -p1
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
@@ -73,10 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 	DIST=$RPM_BUILD_ROOT \
 	LIBDIR=%{_libdir}/bcc \
 	INCLDIR=%{_libdir}/bcc \
-	LOCALPREFIX=%{_prefix}
-
-# FFU (dis88/Makefile is not ready)
-#	MANDIR=%{_mandir}
+	LOCALPREFIX=%{_prefix} \
+	MANDIR=%{_mandir}
 
 cp -R libc/kinclude $RPM_BUILD_ROOT%{_libdir}/bcc
 
@@ -85,17 +85,11 @@ ln -sf objdump86 $RPM_BUILD_ROOT%{_bindir}/size86
 
 # these are separated in bin86 package
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/{as86,ld86}
-%{__rm} $RPM_BUILD_ROOT/usr/man/man1/{as,ld}86.1*
-# move man pages where they belong
-install -d $RPM_BUILD_ROOT%{_mandir}
-mv -f $RPM_BUILD_ROOT/usr/man/* $RPM_BUILD_ROOT%{_mandir}
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/{as,ld}86.1*
 
-%ifnarch %{x8664}
-%{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{ar86,bcc,elksemu,objdump86}}
-%else
-%{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_bindir}/{ar86,bcc,objdump86}}
+%ifnarch %{ix86}
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/elks*.1
 %endif
-%{!?debug:strip -R .comment -R .note $RPM_BUILD_ROOT%{_libdir}/bcc/{bcc*,copt,unproto}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -106,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/ar86
 %attr(755,root,root) %{_bindir}/bcc
 %attr(755,root,root) %{_bindir}/dis86
-%ifnarch %{x8664}
+%ifarch %{ix86}
 %attr(755,root,root) %{_bindir}/elksemu
 %endif
 %attr(755,root,root) %{_bindir}/makeboot
@@ -125,4 +119,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/bcc/crt*.o
 %{_libdir}/bcc/lib*.a
 %{_libdir}/bcc/rules.*
-%{_mandir}/man1/*
+%{_mandir}/man1/bcc.1*
+%{_mandir}/man1/dis86.1*
+%ifarch %{ix86}
+%{_mandir}/man1/elks.1*
+%{_mandir}/man1/elksemu.1*
+%endif
