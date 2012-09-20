@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl.UTF-8):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.18
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www.debath.co.uk/dev86/Dev86src-%{version}.tar.gz
@@ -17,6 +17,7 @@ Patch6:		dev86-long.patch
 Patch7:		dev86-nostrip.patch
 Patch8:		dev86-print-overflow.patch
 Patch9:		dev86-make.patch
+Patch10:	dev86-copt.patch
 URL:		http://www.debath.co.uk/
 Requires:	bin86 >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,6 +54,7 @@ są odwzorowywane do jednego z innych typów całkowitych.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 mv -f bootblocks/README README.bootblocks
 mv -f copt/README README.copt
