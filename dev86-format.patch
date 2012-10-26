@@ -1,0 +1,22 @@
+--- dev86-0.16.19/copt/copt.c.orig	2012-10-26 23:51:09.735174869 +0200
++++ dev86-0.16.19/copt/copt.c	2012-10-26 23:55:09.276050428 +0200
+@@ -803,7 +803,7 @@
+ 	exit(1);
+   }
+   if (headstr != NULL) {
+-	fprintf(fp, headstr);
++	fprintf(fp, "%s", headstr);
+ 	fprintf(fp, "\n");
+   }
+   for (lp = infile; lp != NULL; lp = lp->next)
+--- dev86-0.16.19/ar/ar.c.orig	2012-08-13 21:15:47.000000000 +0200
++++ dev86-0.16.19/ar/ar.c	2012-10-26 23:59:23.414647129 +0200
+@@ -2036,7 +2036,7 @@
+      struct mapelt *mapelt;
+ {
+   fprintf (stderr, "%s: ", program_name);
+-  fprintf (stderr, string);
++  fprintf (stderr, "%s", string);
+   if (mapelt->info.offset != 0)
+     fprintf (stderr, "%s(%s)", archive, mapelt->info.name);
+   else

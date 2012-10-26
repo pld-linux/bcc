@@ -17,6 +17,7 @@ Patch6:		dev86-nostrip.patch
 Patch7:		dev86-print-overflow.patch
 Patch8:		dev86-make.patch
 Patch9:		dev86-copt.patch
+Patch10:	dev86-format.patch
 URL:		http://www.debath.co.uk/
 Requires:	bin86 >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -53,6 +54,7 @@ są odwzorowywane do jednego z innych typów całkowitych.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 mv -f bootblocks/README README.bootblocks
 mv -f copt/README README.copt
