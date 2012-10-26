@@ -21,17 +21,21 @@ diff -Nur dev86-0.16.0.orig/libbsd/Make.defs dev86-0.16.0/libbsd/Make.defs
  IFDEFNAME= ifdef
  
  # Some makes take the last of a list as the default ...
---- dev86-0.16.8/makefile.in.orig	Tue Aug 27 21:57:45 2002
-+++ dev86-0.16.8/makefile.in	Tue Aug 27 22:00:41 2002
-@@ -40,7 +40,7 @@
- WALL  =-Wall -Wstrict-prototypes
- 
- CC	=%CC%
+--- dev86-0.16.19/makefile.in.orig	2012-10-25 21:27:25.627775623 +0200
++++ dev86-0.16.19/makefile.in	2012-10-25 21:29:26.577770547 +0200
+@@ -40,10 +40,10 @@
+        -Wcast-qual -Wcast-align -Wconversion -Waggregate-return \
+        -Wstrict-prototypes -Wmissing-prototypes -Wredundant-decls \
+        -Wnested-externs -Winline 
 -CFLAGS	=$(GCCFLAG) $(WALL) -O2 -g
 +CFLAGS	=$(GCCFLAG) $(WALL) $(OPT)
+ #else
+ WALL  =-Wall -Wstrict-prototypes
+-CFLAGS	=$(GCCFLAG) -O2 -fno-strict-aliasing
++CFLAGS	=$(GCCFLAG) $(OPT) -fno-strict-aliasing
  #endif
  
- #ifndef GNUMAKE
+ #endif
 --- dev86-0.16.8/dis88/Makefile.orig	Fri Jul 31 15:01:40 1998
 +++ dev86-0.16.8/dis88/Makefile	Tue Aug 27 22:38:03 2002
 @@ -25,7 +25,7 @@

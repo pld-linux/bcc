@@ -1,14 +1,14 @@
---- dev86-0.16.17/bcc/bcc.c
-+++ dev86-0.16.17/bcc/bcc.c
-@@ -19,6 +19,7 @@
- #ifdef __STDC__
+--- dev86-0.16.19/bcc/bcc.c.orig	2012-08-13 20:58:29.000000000 +0200
++++ dev86-0.16.19/bcc/bcc.c	2012-10-25 21:33:14.224427660 +0200
+@@ -20,6 +20,7 @@
+ #include <limits.h>
  #include <stdlib.h>
  #ifndef MSDOS
 +#include <limits.h>
  #include <unistd.h>
  #endif
  #else
-@@ -596,12 +597,17 @@
+@@ -600,12 +601,17 @@
     }
  }
  
@@ -29,14 +29,20 @@
     char buf[MAXPATHLEN];
     char ** prefix;
     char * saved_cmd;
-@@ -1308,11 +1314,7 @@
+@@ -1312,17 +1318,7 @@
  
        for(d=s=ptr; d && *s; s=d)
        {
+-#ifndef __BCC__
+-#ifdef PATH_MAX
+-         char buf[PATH_MAX];
+-#else
 -#ifdef MAXPATHLEN
           char buf[MAXPATHLEN];
 -#else
 -         char buf[1024];
+-#endif
+-#endif
 -#endif
  
  	 free(temp);
