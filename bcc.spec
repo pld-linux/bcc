@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl.UTF-8):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.21
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 Source0:	http://v3.sk/~lkundrak/dev86/Dev86src-%{version}.tar.gz
@@ -11,10 +11,11 @@ Patch0:		Dev86src-noroot.patch
 Patch1:		Dev86src-opt.patch
 Patch2:		dev86-0.16.17-fortify.patch
 Patch3:		dev86-pic.patch
-Patch4:		dev86-64bit.patch
+Patch4:		%{name}-lib64.patch
 Patch5:		dev86-noelks.patch
 Patch6:		dev86-nostrip.patch
 Patch7:		dev86-make.patch
+Patch8:		%{name}-libx32.patch
 URL:		http://v3.sk/~lkundrak/dev86/
 Requires:	bin86 >= %{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -48,6 +49,9 @@ są odwzorowywane do jednego z innych typów całkowitych.
 %endif
 %patch6 -p1
 %patch7 -p1
+%if "%{_lib}" == "libx32"
+%patch8 -p1
+%endif
 
 %{__mv} bootblocks/README README.bootblocks
 %{__mv} copt/README README.copt
