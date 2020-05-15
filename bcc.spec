@@ -5,6 +5,7 @@ Version:	0.16.21
 Release:	2
 License:	GPL
 Group:		Development/Languages
+# see also https://github.com/lkundrak/dev86/releases
 Source0:	http://v3.sk/~lkundrak/dev86/Dev86src-%{version}.tar.gz
 # Source0-md5:	6b96fe9d2d1c546842a4d1c7ef387e4c
 Patch0:		Dev86src-noroot.patch
