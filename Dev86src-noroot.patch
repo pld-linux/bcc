@@ -1,6 +1,7 @@
---- dev86-0.16.15.org/elksemu/Makefile	Mon Nov  5 10:12:46 2001
-+++ dev86-0.16.15/elksemu/Makefile	Mon Nov  5 10:13:12 2001
-@@ -39,7 +39,7 @@
+diff -urNp -x '*.orig' dev86-0.16.21.org/elksemu/Makefile dev86-0.16.21/elksemu/Makefile
+--- dev86-0.16.21.org/elksemu/Makefile	2013-10-29 16:44:51.000000000 +0100
++++ dev86-0.16.21/elksemu/Makefile	2024-06-09 15:11:41.740995836 +0200
+@@ -42,7 +42,7 @@ dummy:
  # to redirect.
  install: elksemu
  	install -d $(DIST)/lib
@@ -8,4 +9,4 @@
 +	install -m 755 elksemu $(DIST)/lib/elksemu
  
  clean realclean:
- 	rm -f $(OBJ) binfmt_elks.o elksemu call_tab.v defn_tab.v
+ 	rm -f $(OBJ) binfmt_elks.o elksemu call_tab.v defn_tab.v efile.h
