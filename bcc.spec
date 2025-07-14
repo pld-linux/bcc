@@ -38,20 +38,20 @@ są odwzorowywane do jednego z innych typów całkowitych.
 
 %prep
 %setup -q -n dev86-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p0
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
+%patch -P3 -p0
 %if "%{_lib}" == "lib64"
-%patch4 -p1
+%patch -P4 -p1
 %endif
 %ifnarch %{ix86}
-%patch5 -p1
+%patch -P5 -p1
 %endif
-%patch6 -p1
-%patch7 -p1
+%patch -P6 -p1
+%patch -P7 -p1
 %if "%{_lib}" == "libx32"
-%patch8 -p1
+%patch -P8 -p1
 %endif
 
 %{__mv} bootblocks/README README.bootblocks
