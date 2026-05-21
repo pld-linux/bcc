@@ -2,7 +2,7 @@ Summary:	Bruce's C compiler
 Summary(pl.UTF-8):	Kompilator C Bruce'a
 Name:		bcc
 Version:	0.16.21
-Release:	4
+Release:	5
 License:	GPL
 Group:		Development/Languages
 # see also https://github.com/lkundrak/dev86/releases
@@ -63,7 +63,9 @@ są odwzorowywane do jednego z innych typów całkowitych.
 %build
 CC="%{__cc}" \
 %{__make} -j1 all other \
-	OPT="%{rpmcppflags} %{rpmcflags}" <<!FooBar!
+	OPT="%{rpmcppflags} %{rpmcflags} -std=gnu89" \
+	HOSTCC="%{__cc}" \
+	HOSTCCFLAGS="%{rpmcppflags} %{rpmcflags} -std=gnu89" <<!FooBar!
 5
 quit
 !FooBar!
